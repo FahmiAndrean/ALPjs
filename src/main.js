@@ -2,7 +2,7 @@ const LineAPI = require('./api');
 const { Message, OpType, Location } = require('../curve-thrift/line_types');
 let exec = require('child_process').exec;
 
-const myBot = ['u07bea77e0ddbe298a45f2758d834ce48','u79c68416a26d7db88b9d44042dafd4f5','u0e18f39c40973be5f201cc1b00528be4'];
+const myBot = ['u7b8f35567fee016d196112004b6e3573','u95398154aeacc458d63ca8f99dfde1e8','u5e7cbf89cc248b791ff90cd12498d58d'];
 
 
 function isAdminOrBot(param) {
@@ -120,7 +120,7 @@ class LINE extends LineAPI {
             this.stateStatus[action] = state;
             this._sendMessage(seq,`Status: \n${JSON.stringify(this.stateStatus)}`);
         } else {
-            this._sendMessage(seq,`Kamu bukan admin.`);
+            this._sendMessage(seq,`Keyword SysTeM khusus FahmiAndrean`);
         }
     }
 
@@ -188,7 +188,7 @@ class LINE extends LineAPI {
         let txt = textMessages.toLowerCase();
         let messageID = seq.id;
 
-        if(cmd == 'a:cancel') {
+        if(cmd == 'MiCancel') {
             if(payload == 'group') {
                 let groupid = await this._getGroupsInvited();
                 for (let i = 0; i < groupid.length; i++) {
@@ -197,19 +197,19 @@ class LINE extends LineAPI {
             }
         }
 
-        if(txt == 'response' || txt == 'respon') {
-            this._sendMessage(seq, '[Aira] for a');
+        if(txt == 'halo' || txt == 'respon') {
+            this._sendMessage(seq, 'this SysTeM creator is line.me/ti/p/~fahmiadrn');
         }
 
 	if(txt == 'keyword' || txt == 'help' || txt == 'key') {
-	    this._sendMessage(seq, '[Umum]:\n(1.) respon\n(2.) a:speed\n(3.) a:point\n(4.) a:check\n5. /reset\n6. /myid\n7. /open\n8. /close\n9. /join\n\n[Admin]:\n1. ak on/off\n2. ac on/off\n3. /cancel\n4. /spm\n5. /left\n\n-Safiqq-');
+	    this._sendMessage(seq, '[Umum]:\n1.respon/halo\n2.Mispeed\n3.MiPoint\n4.MiCheck\n5.Mireset\n6.myid\n7.openurl\n8.closeurl\n9.join\n\n[SysTeM Fahmi]:\n1.deffkick on/off\n2.deffcancel on/off\n3.cancel\n4.spm\n5.SysTem bye\n6.SysTem absen');
 	}
 
-        if(txt == 'a:speed') {
+        if(txt == 'mispeed') {
             const curTime = (Date.now() / 1000);
-            await this._sendMessage(seq,'Processing....');
+            await this._sendMessage(seq,'SysTeM sedang berjalan....');
             const rtime = (Date.now() / 1000) - curTime;
-            await this._sendMessage(seq, `${rtime} second(s)`);
+            await this._sendMessage(seq, `${rtime} crot`);
         }
 
         if(txt == 'tes' && isAdminOrBot(seq.from)) {
@@ -221,24 +221,24 @@ class LINE extends LineAPI {
             }
         }
 
-        if(txt == 'a:point') {
+        if(txt == 'mipoint') {
             this._sendMessage(seq, `Read point telah di set!`);
             this.removeReaderByGroup(seq.to);
         }
 
-        if(txt == 'a:reset') {
+        if(txt == 'mireset') {
             this.checkReader = []
             this._sendMessage(seq, `Read point telah di reset!`);
         }
 
-	if(txt == 'a:tagall' && isAdminOrBot (seq.from)) {
+	if(txt == 'SysTeM absen' && isAdminOrBot (seq.from)) {
             let rec = await this._getGroup(seq.to);
             const mentions = await this.mention(rec.members);
    	    seq.contentMetadata = mentions.cmddata;
             await this._sendMessage(seq,mentions.names.join(''));
         }
 
-        if(txt == 'a:check') {
+        if(txt == 'micheck') {
             let rec = await this.check(this.checkReader,seq.to);
             const mentions = await this.mention(rec);
             seq.contentMetadata = mentions.cmddata;
@@ -250,22 +250,22 @@ class LINE extends LineAPI {
             this._sendMessage(seq,seq.contentMetadata.mid);
         }
 	
-        const action = ['ac on','ac off','ak on','ak off']
+        const action = ['deffcancel on','deffcancel off','deffkick on','deffkick off']
         if(action.includes(txt)) {
             this.setState(seq)
         } 
 
 	if(txt == 'creator') {
-	    const mid = ['u79c68416a26d7db88b9d44042dafd4f5'];
+	    const mid = ['u7b8f35567fee016d196112004b6e3573'];
 	    const contact = this._getContacts(mid);
-	    this._sendMessage(seq, '${contact}');
+	    this._sendMessage(seq, 'SysTeM line.me/ti/p/~fahmiadrn');
 	}
 
-        if(txt == 'a:myid') {
-            this._sendMessage(seq,`MID kamu: ${seq.from}`);
+        if(txt == 'myid') {
+            this._sendMessage(seq,`SysTeM MID: ${seq.from}`);
         }
 
-        const joinByUrl = ['a:open','a:close'];
+        const joinByUrl = ['openurl','closeurl'];
         if(joinByUrl.includes(txt)) {
             let updateGroup = await this._getGroup(seq.to);
             updateGroup.preventJoinByTicket = true;
@@ -277,19 +277,19 @@ class LINE extends LineAPI {
             await this._updateGroup(updateGroup);
         }
 
-        if(cmd == 'a:join') { //untuk join group pake qrcode contoh: join line://anu/g/anu
+        if(cmd == 'join') { //untuk join group pake qrcode contoh: join line://anu/g/anu
             const [ ticketId ] = payload.split('g/').splice(-1);
             let { id } = await this._findGroupByTicket(ticketId);
             await this._acceptGroupInvitationByTicket(id,ticketId);
         }
 
-        if(cmd == 'a:spm' && isAdminOrBot(seq.from)) { // untuk spam invite contoh: spm <mid>
+        if(cmd == 'spm' && isAdminOrBot(seq.from)) { // untuk spam invite contoh: spm <mid>
             for (var i = 0; i < 4; i++) {
                 this._createGroup(`SPAM`,payload);
             }
         }
         
-        if(txt == 'a:left' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
+        if(txt == 'SysTeM bye' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
             this._leaveGroup(seq.to);
         }
 
