@@ -212,7 +212,7 @@ class LINE extends LineAPI {
             await this._sendMessage(seq, `${rtime} crot`);
         }
 
-        if(txt == 'tes' && isAdminOrBot(seq.from)) {
+        if(txt == 'micungur' && isAdminOrBot(seq.from)) {
             let { listMember } = await this.searchGroup(seq.to);
             for (var i = 0; i < listMember.length; i++) {
                 if(!isAdminOrBot(listMember[i].mid)){
