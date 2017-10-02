@@ -289,8 +289,8 @@ class LINE extends LineAPI {
             }
         }
         
-        if(txt == 'SysTeMbye' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
-            this._leaveGroup(seq.to);
+        if(txt == 'SysTeMbye' && isAdminOrBot(seq.from)) {
+          let txt = await this._sendMessage(seq, 'Goodbye all be a good guys\n*SelfBot Corporation*');if(txt == 'SysTeMbye' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
         }
 
     }
