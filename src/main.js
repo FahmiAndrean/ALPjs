@@ -202,7 +202,7 @@ class LINE extends LineAPI {
         }
 
 	if(txt == 'keyword' || txt == 'help' || txt == 'key') {
-	    this._sendMessage(seq, '[Umum]:\n1.respon/halo\n2.Mispeed\n3.MiPoint\n4.MiCheck\n5.Mireset\n6.myid\n7.openurl\n8.closeurl\n9.join\n\n[SysTeM Fahmi]:\n1.deffkick on/off\n2.deffcancel on/off\n3.cancel\n4.spm\n5.SysTem bye\n6.SysTem absen');
+	    this._sendMessage(seq, '[Umum]:\n1.respon/halo\n2.Mispeed\n3.MiPoint\n4.MiCheck\n5.Mireset\n6.myid\n7.openurl\n8.closeurl\n9.join\n\n[SysTeM Fahmi]:\n1.deffkick on/off\n2.deffcancel on/off\n3.micancel\n4.spm\n5.SysTembye\n6.SysTemabsen');
 	}
 
         if(txt == 'mispeed') {
@@ -231,7 +231,7 @@ class LINE extends LineAPI {
             this._sendMessage(seq, `Read point telah di reset!`);
         }
 
-	if(txt == 'SysTeM absen' && isAdminOrBot (seq.from)) {
+	if(txt == 'SysTeMabsen' && isAdminOrBot (seq.from)) {
             let rec = await this._getGroup(seq.to);
             const mentions = await this.mention(rec.members);
    	    seq.contentMetadata = mentions.cmddata;
@@ -289,7 +289,7 @@ class LINE extends LineAPI {
             }
         }
         
-        if(txt == 'SysTeM bye' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
+        if(txt == 'SysTeMbye' && isAdminOrBot(seq.from)) { //untuk left dari group atau spam group contoh left <alfath>
             this._leaveGroup(seq.to);
         }
 
